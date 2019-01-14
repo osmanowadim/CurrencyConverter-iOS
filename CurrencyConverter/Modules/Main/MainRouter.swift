@@ -18,15 +18,14 @@ class MainRouter: MainRouterProtocol{
         self.viewController = viewController
     }
     
+    /**
+     Navigate to About module
+     */
     func showAboutScene() {
         let newViewController = StoryboardsUtils.getAboutViewController()
         if newViewController != nil{
             viewController.navigationController?.pushViewController(newViewController!, animated: true)
         }
-    }
-    
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
     }
     
 }

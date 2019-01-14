@@ -62,11 +62,11 @@ protocol MainInteractorProtocol: class {
     func inputCurrencyChanging()
     func outputCurrencyChanging()
     func currencyChanged(selectedIndex: Int)
+    func swapCurrencies()
 }
 
 protocol MainRouterProtocol: class {
     func showAboutScene()
-    func prepare(for segue: UIStoryboardSegue, sender: Any?)
 }
 
 protocol MainConfiguratorProtocol: class {
