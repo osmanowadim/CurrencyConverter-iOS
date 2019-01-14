@@ -77,22 +77,35 @@ class MainInteractor: MainInteractorProtocol{
         return currencyService.currencyNames
     }
     
+    /**
+     Get new currency by selectedIndex and call getRatio(newCurrency: newCurrency)
+     - parameters:
+     - selectedIndex: index of selected Currency in CurrencyPickerView
+     */
     func currencyChanged(selectedIndex: Int) {
         if currencyService.currencies.count > selectedIndex {
-            
             let newCurrency = currencyService.currencies[selectedIndex]
             getRatio(newCurrency: newCurrency)
         }
     }
     
+    /**
+     Set currencyChangingMode to .inputCurrencyChanging
+     */
     func inputCurrencyChanging() {
         currencyChangingMode = .inputCurrencyChanging
     }
     
+    /**
+     Set currencyChangingMode to .outputCurrencyChanging
+     */
     func outputCurrencyChanging() {
         currencyChangingMode = .outputCurrencyChanging
     }
     
+    /**
+     Get all currencies from network, save their to Storage, sort and update. And then call getRatio()
+     */
     func getAllCurrencies(){
         repository.fetchAllCurrencies()
             .subscribe(
@@ -102,11 +115,17 @@ class MainInteractor: MainInteractorProtocol{
                     self.getRatio(newCurrency: nil)
             },
                 onError: { error in
+                    self.presenter.showAlertView(with: error.localizedDescription)
                     debugPrint("Error = \(error)")
             })
             .disposed(by: disposeBag)
     }
     
+    /**
+     Get ratio between input and output currencies
+     - parameters:
+     - newCurrency: new Currency
+     */
     func getRatio(newCurrency: Currency?){
         presenter.showHUD()
         
@@ -121,7 +140,7 @@ class MainInteractor: MainInteractorProtocol{
                 requestOutputCurrencyShortName = newCurrency.id
             }
         }
-        
+        //Download ratio from server
         repository.getRatio(inputCurrencyShortName: requestInputCurrencyShortName, outputCurrencyShortName: requestOutputCurrencyShortName)
             .subscribe(
                 onNext: { ratio in
@@ -144,6 +163,45 @@ class MainInteractor: MainInteractorProtocol{
                     self.presenter.showAlertView(with: error.localizedDescription)
             })
             .disposed(by: disposeBag)
+    }
+    
+    /**
+     Get ratio between 2 currencies
+     - parameters:
+     - inputCurrencyShortName: id of input Currency
+     - outputCurrencyShortName: id of output Currency
+     */
+    func getRatio(inputCurrencyShortName: String, outputCurrencyShortName: String){
+        repository.getRatio(inputCurrencyShortName: inputCurrencyShortName, outputCurrencyShortName: outputCurrencyShortName)
+            .subscribe(
+                onNext: { ratio in
+                    self.presenter.inputCurrencyNameUpdated()
+                    self.presenter.outputCurrencyNameUpdated()
+                    self.currencyService.saveOutputCurrencyRatio(ratio: ratio)
+                    self.presenter.hideHUD()
+                    self.presenter.updateOutputValue()
+                    self.presenter.updateRateText()
+            },
+                onError: { error in
+                    debugPrint("Error = \(error)")
+                    self.presenter.showAlertView(with: error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    /**
+     Swap input and output cirrencies
+     */
+    func swapCurrencies() {
+        //Save data in new cells
+        let oldInputCurrency = currencyService.inputCurrency
+        let oldOutputCurrency = currencyService.outputCurrency
+        
+        //Swap data
+        currencyService.inputCurrency = oldOutputCurrency
+        currencyService.outputCurrency = oldInputCurrency
+        
+        getRatio(inputCurrencyShortName: currencyService.inputCurrency.id, outputCurrencyShortName: currencyService.outputCurrency.id)
     }
     
 }

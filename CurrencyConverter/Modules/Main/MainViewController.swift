@@ -8,8 +8,9 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController, MainViewProtocol {
-   
+    
     @IBOutlet weak var HUDView: UIView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var loadCurrenciesButton: UIButton!
@@ -39,7 +40,7 @@ class MainViewController: UIViewController, MainViewProtocol {
     }
     
     @IBAction func inputCurrencyButtonClicked(_ sender: Any) {
-         presenter.inputCurrencyButtonClicked()
+        presenter.inputCurrencyButtonClicked()
     }
     
     @IBAction func outputCurrencyButtonClicked(_ sender: Any) {
@@ -151,7 +152,7 @@ class MainViewController: UIViewController, MainViewProtocol {
         configurator.configure(with: self)
         presenter.configureView()
     }
-
+    
 }
 
 extension MainViewController: UITextFieldDelegate{
