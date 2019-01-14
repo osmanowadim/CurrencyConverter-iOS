@@ -7,11 +7,15 @@
 //
 
 import Foundation
-import UIKit
 
 
 class MainConfigurator: MainConfiguratorProtocol{
     
+    /**
+     Configure all class in Main module
+     - parameters:
+     - viewController: `MainViewController`
+     */
     func configure(with viewController: MainViewController) {
         let presenter = MainPresenter(view: viewController)
         let repository = MainRepository()

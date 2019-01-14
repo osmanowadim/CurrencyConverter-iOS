@@ -18,6 +18,9 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
     let inputCurrencyPickerViewTitle = "Select input currency"
     let outputCurrencyPickerViewTitle = "Select output currency"
     
+    /**
+     Get rateText for rate label. Return data in format like - 1 USD = 28.2759 UAH
+     */
     var rateText: String {
         get {
             let inputShortName = interactor.inputCurrencyShortName
@@ -28,6 +31,12 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         }
     }
     
+    /**
+     Set inputValue
+     - parameters:
+     - newValue: value `String` or 0.0 (if value == nil)
+     Get inputValue return `String`
+     */
     var inputValue: String? {
         set {
             if let value = newValue {
@@ -42,6 +51,10 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
             return input
         }
     }
+    
+    /**
+     Get outputValue return `String`
+     */
     var outputValue: String? {
         get {
             let formatter = NumberFormatter()
@@ -58,11 +71,13 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
             return output
         }
     }
+    
     var inputCurrencyShortName: String {
         get {
             return interactor.inputCurrencyShortName
         }
     }
+    
     var outputCurrencyShortName: String {
         get {
             return interactor.outputCurrencyShortName
@@ -73,6 +88,9 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         self.view = view
     }
     
+    /**
+     Configure MainViewController, update Rate text, download all currencies from network and show HUD
+     */
     func configureView() {
         view?.setInputValue(with: inputValue)
         view?.setOutputValue(with: outputValue)
@@ -80,7 +98,7 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         view?.setOutputCurrencyShortName(with: outputCurrencyShortName)
         view?.addDoneOnInputCurrencyKeyboard()
         updateRateText()
-        interactor.getAllCurrencies()
+        getAllCurrencies()
         view?.showHUD()
     }
     
@@ -96,6 +114,10 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         updateOutputValue(with: "")
     }
     
+    /**
+     Action by click on inputCurrencyButton
+     -> Hide keyboard, show input CurrencyPickerView
+     */
     func inputCurrencyButtonClicked() {
         view.hideKeyboard()
         interactor.inputCurrencyChanging()
@@ -106,6 +128,10 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         view.showPickerView()
     }
     
+    /**
+     Action by click on outputCurrencyButton
+     -> Hide keyboard, show output CurrencyPickerView
+     */
     func outputCurrencyButtonClicked() {
         view.hideKeyboard()
         interactor.outputCurrencyChanging()
@@ -116,16 +142,33 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         view.showPickerView()
     }
     
+    /**
+     Action by click on loadCurrencyButton
+     -> Call getAllCurrencies() in MainInteractor
+     */
     func loadCurrenciesButtonClicked() {
-        interactor.getAllCurrencies()
+        getAllCurrencies()
     }
     
+    /**
+     Action by click on infoButton
+     -> Call showAboutScene() in MainRouter
+     */
     func infoButtonClicked() {
         router.showAboutScene()
     }
     
+    /**
+     Action by click on swapCurrencyButton
+     -> Show HUD and call swapCurrencies() in MainInteractor
+     */
     func swapButtonClicked() {
-        
+        if NetworkUtils.isConnectedToNetwork(){
+            view.showHUD()
+            interactor.swapCurrencies()
+        } else{
+            MessageUtils.shared.showMessageErrorConnection()
+        }
     }
     
     func showHUD() {
@@ -144,6 +187,11 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         updateOutputValue(with: inputValue)
     }
     
+    /**
+     Show alert view
+     - parameters:
+     - text: `String` text of alert view
+     */
     func showAlertView(with text: String) {
         view.showAlertView(with: text)
     }
@@ -164,14 +212,36 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         view.hidePickerView()
     }
     
+    /**
+     Action by click button `Apply` in CurrencyPickerView
+     - parameters:
+     - selectedRow: `Int` index of selected position in CurrencyPickerView
+     */
     func currencyPickerViewApplyButtonClicked(selectedRow: Int) {
         view.hidePickerView()
         interactor.currencyChanged(selectedIndex: selectedRow)
     }
     
+    /**
+     Update output value
+     - parameters:
+     - inputText: `String` input Value
+     */
     private func updateOutputValue(with inputText: String?) {
         inputValue = inputText
         view?.setOutputValue(with: outputValue)
+    }
+    
+    /**
+     Get all currencies from MainInteractor if there is Network connection.
+     Else show message error connecction
+     */
+    private func getAllCurrencies(){
+        if NetworkUtils.isConnectedToNetwork(){
+            interactor.getAllCurrencies()
+        }else{
+            MessageUtils.shared.showMessageErrorConnection()
+        }
     }
     
 }

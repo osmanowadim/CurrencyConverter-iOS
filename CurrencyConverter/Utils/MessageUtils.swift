@@ -18,6 +18,14 @@ open class MessageUtils{
         return Static.instance
     }
     
+    /**
+     Show message on Screen
+     - parameters:
+     - theme: `Theme` for message
+     - title: `String` title in Message
+     - body: `String` body in Message
+     - iconText: `String` icon in Message
+     */
     open func showMessage(theme: Theme, title: String, body: String, iconText: String){
         let messageView: MessageView = MessageView.viewFromNib(layout: .cardView)
         messageView.configureTheme(theme)
@@ -30,6 +38,9 @@ open class MessageUtils{
         SwiftMessages.show(view: messageView)
     }
     
+    /**
+     Show message error Netwok connection on Screen
+     */
     open func showMessageErrorConnection(){
         let messageView: MessageView = MessageView.viewFromNib(layout: .cardView)
         messageView.configureTheme(.error)
@@ -42,6 +53,11 @@ open class MessageUtils{
         SwiftMessages.show(view: messageView)
     }
     
+    /**
+     Show error message on Screen
+     - parameters:
+     - body: `String` body in Message
+     */
     open func showMessageError(body: String){
         let messageView: MessageView = MessageView.viewFromNib(layout: .cardView)
         messageView.configureTheme(.error)

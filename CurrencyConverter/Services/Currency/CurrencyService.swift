@@ -40,6 +40,10 @@ class CurrencyService: CurrencyServiceProtocol {
         outputCurrency = storageService.savedOutputCurrency() ?? DefaultCurrency.defaultCurrency2
     }
     
+    /**
+     Set -> Set newValue if newValue not equals inputValue
+     Get -> Return `Double` input value or 1
+     */
     var inputValue: Double {
         didSet {
             if (oldValue != inputValue) {
@@ -47,6 +51,10 @@ class CurrencyService: CurrencyServiceProtocol {
             }
         }
     }
+    
+    /**
+     Return `Double` output value
+     */
     var outputValue: Double {
         get {
             var value = inputValue
@@ -54,6 +62,11 @@ class CurrencyService: CurrencyServiceProtocol {
             return value
         }
     }
+    
+    /**
+     Set -> Set newCurrency if newCurrency not equals inputCurrency
+     Get -> Return `Currency` input value or DefaultCurrency.defaultCurrency1
+     */
     var inputCurrency: Currency {
         didSet {
             if (oldValue != inputCurrency) {
@@ -61,6 +74,11 @@ class CurrencyService: CurrencyServiceProtocol {
             }
         }
     }
+    
+    /**
+     Set -> Set newCurrency if newCurrency not equals outputCurrency
+     Get -> Return `Currency` output value or DefaultCurrency.defaultCurrency2
+     */
     var outputCurrency: Currency {
         didSet {
             if (oldValue != outputCurrency) {
@@ -69,11 +87,19 @@ class CurrencyService: CurrencyServiceProtocol {
         }
     }
     
+    /**
+     Save all currencies
+     - parameters:
+     - currencies: `[Currency]` array of Currency
+     */
     func saveAllCurrencies(currencies: [Currency]) {
         self.currencies = currencies
         currencyNames = [String]()
     }
     
+    /**
+     Sort by `Int` id and update saved currencies
+     */
     func sortAndUpdateCurrentCurrencies() {
         if currencies.count > 0 {
             currencies.sort {
@@ -110,8 +136,14 @@ class CurrencyService: CurrencyServiceProtocol {
         }
     }
     
+    /**
+     Save output currency ratio
+     - parameters:
+     - ratio: `Double` output currency ratio
+     */
     func saveOutputCurrencyRatio(ratio: Double) {
         outputCurrency.ratio = ratio
         storageService.saveOutputCurrency(with: outputCurrency)
     }
+    
 }
