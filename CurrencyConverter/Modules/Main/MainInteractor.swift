@@ -140,7 +140,7 @@ class MainInteractor: MainInteractorProtocol{
                 requestOutputCurrencyShortName = newCurrency.id
             }
         }
-        //Download ratio from server
+        //Download ratio from network
         repository.getRatio(inputCurrencyShortName: requestInputCurrencyShortName, outputCurrencyShortName: requestOutputCurrencyShortName)
             .subscribe(
                 onNext: { ratio in
@@ -184,6 +184,7 @@ class MainInteractor: MainInteractorProtocol{
             },
                 onError: { error in
                     debugPrint("Error = \(error)")
+                    self.presenter.hideHUD()
                     self.presenter.showAlertView(with: error.localizedDescription)
             })
             .disposed(by: disposeBag)
