@@ -14,6 +14,9 @@ import RxSwift
 
 struct MainRepository{
     
+    /**
+     Fetch all currencies from Network. Return `Observable<[Currency]>`
+     */
     func fetchAllCurrencies() -> Observable<[Currency]> {
         return Observable<[Currency]>.create { observer -> Disposable in
             let request = Alamofire
@@ -47,6 +50,12 @@ struct MainRepository{
         }
     }
     
+    /**
+     Fetch ratio between 2 currencies from Network. Return `Observable<[Double]>`
+     - parameters:
+     - inputCurrencyShortName: `String` id of input Currency
+     - outputCurrencyShortName: `String` id of output Currency
+     */
     func getRatio(inputCurrencyShortName: String, outputCurrencyShortName: String) -> Observable<Double>{
         return Observable<Double>.create { observer -> Disposable in
             let request = Alamofire

@@ -11,6 +11,9 @@ import UIKit
 
 struct StoryboardsUtils{
     
+    /**
+     Return `AboutViewController` using About storyboard
+     */
     static func getAboutViewController() -> AboutViewController?{
         let storyBoard: UIStoryboard = UIStoryboard(name: "About", bundle: nil)
         guard let newViewController = storyBoard.instantiateViewController(withIdentifier: "AboutViewController")
@@ -19,5 +22,5 @@ struct StoryboardsUtils{
         }
         return newViewController
     }
-
+    
 }

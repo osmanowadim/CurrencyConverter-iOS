@@ -31,6 +31,19 @@ class CurrencyPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate, 
     private let numberOfComponents = 1
     private let componentIndex = 0
     
+    var arrayCurrencyNames = [String]()
+    var title = "" {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
+    var selectedCurrencyIndex: Int? {
+        didSet {
+            pickerView.selectRow(selectedCurrencyIndex!, inComponent: componentIndex, animated: false)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         xibSetup()
@@ -41,54 +54,59 @@ class CurrencyPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate, 
         xibSetup()
     }
     
-    private func xibSetup() {
-        Bundle.main.loadNibNamed("CurrencyPickerView", owner: self, options: nil)
-        addSubview(view)
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-    
-    // MARK: - CurrencyPickerViewProtocol
-    
-    var arrayCurrencyNames = [String]()
-    var title = "" {
-        didSet {
-            titleLabel.text = title
-        }
-    }
-    
-    func reload() {
-        pickerView.reloadAllComponents()
-    }
-    
-    var selectedCurrencyIndex: Int? {
-        didSet {
-            pickerView.selectRow(selectedCurrencyIndex!, inComponent: componentIndex, animated: false)
-        }
-    }
-    
-    // MARK: - UIPickerView dataSource methods
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return numberOfComponents
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrayCurrencyNames.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrayCurrencyNames[row]
-    }
-    
-    // MARK: - Action methods
-    
     @IBAction func cancelButtonClicked(_ sender: Any) {
         delegate?.currencyPickerViewCancelButtonClicked()
     }
     
     @IBAction func applyButtonClicked(_ sender: Any) {
         delegate?.currencyPickerViewApplyButtonClicked(selectedRow: pickerView.selectedRow(inComponent: componentIndex))
+    }
+    
+    /**
+     Reload all components of CurrencyPickerView
+     */
+    func reload() {
+        pickerView.reloadAllComponents()
+    }
+    
+    /**
+     Return `Int` count of components in UIPickerView
+     - parameters:
+     - pickerView: `UIPickerView`
+     */
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return numberOfComponents
+    }
+    
+    /**
+     Return `Int` count of items in UIPickerView
+     - parameters:
+     - pickerView: `UIPickerView`
+     - numberOfRowsInComponent: `Int`
+     */
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return arrayCurrencyNames.count
+    }
+    
+    /**
+     Return `String` name of selected Currency
+     - parameters:
+     - pickerView: `UIPickerView`
+     - titleForRow: `Int`
+     - forComponent: `Int`
+     */
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return arrayCurrencyNames[row]
+    }
+    
+    /**
+     Setup CurrencyPickerView
+     */
+    private func xibSetup() {
+        Bundle.main.loadNibNamed("CurrencyPickerView", owner: self, options: nil)
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
 }
