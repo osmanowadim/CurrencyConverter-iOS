@@ -98,7 +98,7 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
         view?.setOutputCurrencyShortName(with: outputCurrencyShortName)
         view?.addDoneOnInputCurrencyKeyboard()
         updateRateText()
-        interactor.getAllCurrencies()
+        getAllCurrencies()
         view?.showHUD()
     }
     
@@ -147,7 +147,7 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
      -> Call getAllCurrencies() in MainInteractor
      */
     func loadCurrenciesButtonClicked() {
-        interactor.getAllCurrencies()
+        getAllCurrencies()
     }
     
     /**
@@ -163,8 +163,12 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
      -> Show HUD and call swapCurrencies() in MainInteractor
      */
     func swapButtonClicked() {
-        view.showHUD()
-        interactor.swapCurrencies()
+        if NetworkUtils.isConnectedToNetwork(){
+            view.showHUD()
+            interactor.swapCurrencies()
+        } else{
+            MessageUtils.shared.showMessageErrorConnection()
+        }
     }
     
     func showHUD() {
@@ -226,6 +230,18 @@ class MainPresenter: MainPresenterProtocol, CurrencyPickerViewDelegate{
     private func updateOutputValue(with inputText: String?) {
         inputValue = inputText
         view?.setOutputValue(with: outputValue)
+    }
+    
+    /**
+     Get all currencies from MainInteractor if there is Network connection.
+     Else show message error connecction
+     */
+    private func getAllCurrencies(){
+        if NetworkUtils.isConnectedToNetwork(){
+            interactor.getAllCurrencies()
+        }else{
+            MessageUtils.shared.showMessageErrorConnection()
+        }
     }
     
 }

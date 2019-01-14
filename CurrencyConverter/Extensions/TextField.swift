@@ -12,6 +12,11 @@ import UIKit
 
 extension UITextField {
     
+    /**
+     Return `Bool` for available adding `String` in TextField
+     - parameters:
+     - string: `String` new string in TextField
+     */
     func availableAdding(string: String) -> Bool {
         switch string {
         case "":
@@ -25,6 +30,11 @@ extension UITextField {
         }
     }
     
+    /**
+     Change TextField using incomming string
+     - parameters:
+     - string: `String`
+     */
     func addString(_ string: String) {
         var newValue: String = self.text ?? ""
         var addingString = string
@@ -39,10 +49,16 @@ extension UITextField {
         self.text = newValue
     }
     
+    /**
+     Clear TextField
+     */
     func clear() {
         self.text = ""
     }
     
+    /**
+     Add button `Done` to Keyboard
+     */
     func addDoneOnKeyboard() {
         let keyboardToolbar = UIToolbar()
         keyboardToolbar.sizeToFit()
@@ -52,6 +68,9 @@ extension UITextField {
         self.inputAccessoryView = keyboardToolbar
     }
     
+    /**
+     Dismiss Keyboard
+     */
     @objc func dismissKeyboard() {
         self.resignFirstResponder()
     }

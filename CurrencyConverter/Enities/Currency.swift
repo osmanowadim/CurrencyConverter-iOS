@@ -29,12 +29,21 @@ struct Currency: Mappable, Codable, Equatable {
         self.index = index
     }
     
+    /**
+     Mapping data from object `Map`
+     */
     mutating func mapping(map: Map) {
         currencyName <- map["currencyName"]
         currencySymbol <- map["currencySymbol"]
         id <- map["id"]
     }
     
+    /**
+     Return `Bool` by equals between 2 Currency
+     - parameters:
+     - lhs: `Currency` first Currency
+     - rhs: `Currency` second Currency
+     */
     static func == (lhs: Currency, rhs: Currency) -> Bool {
         if lhs.currencyName == rhs.currencyName, lhs.id == rhs.id, lhs.ratio == rhs.ratio, lhs.index == rhs.index {
             return true

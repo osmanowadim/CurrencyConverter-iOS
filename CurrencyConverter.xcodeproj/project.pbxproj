@@ -11,6 +11,11 @@
 		0727EB7E21E890B700E1A956 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB7D21E890B700E1A956 /* Currency.swift */; };
 		0727EB8121E8BED800E1A956 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8021E8BED800E1A956 /* StorageService.swift */; };
 		0727EB8521E8D99800E1A956 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8421E8D99800E1A956 /* CurrencyService.swift */; };
+		0727EB8721ECB4A000E1A956 /* AboutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8621ECB4A000E1A956 /* AboutProtocol.swift */; };
+		0727EB8921ECB53700E1A956 /* AboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8821ECB53700E1A956 /* AboutPresenter.swift */; };
+		0727EB8B21ECB61400E1A956 /* AboutConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8A21ECB61400E1A956 /* AboutConfigurator.swift */; };
+		0727EB8D21ECB6C000E1A956 /* AboutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8C21ECB6C000E1A956 /* AboutInteractor.swift */; };
+		0727EB8F21ECB72600E1A956 /* AboutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727EB8E21ECB72600E1A956 /* AboutRouter.swift */; };
 		0751180121E74BA600394875 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751180021E74BA600394875 /* AppDelegate.swift */; };
 		0751180321E74BA600394875 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751180221E74BA600394875 /* MainViewController.swift */; };
 		0751180621E74BA600394875 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0751180421E74BA600394875 /* Main.storyboard */; };
@@ -60,6 +65,11 @@
 		0727EB7D21E890B700E1A956 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		0727EB8021E8BED800E1A956 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		0727EB8421E8D99800E1A956 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		0727EB8621ECB4A000E1A956 /* AboutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutProtocol.swift; sourceTree = "<group>"; };
+		0727EB8821ECB53700E1A956 /* AboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPresenter.swift; sourceTree = "<group>"; };
+		0727EB8A21ECB61400E1A956 /* AboutConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutConfigurator.swift; sourceTree = "<group>"; };
+		0727EB8C21ECB6C000E1A956 /* AboutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutInteractor.swift; sourceTree = "<group>"; };
+		0727EB8E21ECB72600E1A956 /* AboutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRouter.swift; sourceTree = "<group>"; };
 		075117FD21E74BA600394875 /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0751180021E74BA600394875 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0751180221E74BA600394875 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +267,11 @@
 			isa = PBXGroup;
 			children = (
 				0751185A21E7919900394875 /* AboutViewController.swift */,
+				0727EB8621ECB4A000E1A956 /* AboutProtocol.swift */,
+				0727EB8821ECB53700E1A956 /* AboutPresenter.swift */,
+				0727EB8A21ECB61400E1A956 /* AboutConfigurator.swift */,
+				0727EB8C21ECB6C000E1A956 /* AboutInteractor.swift */,
+				0727EB8E21ECB72600E1A956 /* AboutRouter.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -549,6 +564,7 @@
 				0751184121E7520B00394875 /* MainRouter.swift in Sources */,
 				0751180121E74BA600394875 /* AppDelegate.swift in Sources */,
 				0751185421E76A7500394875 /* TextField.swift in Sources */,
+				0727EB8D21ECB6C000E1A956 /* AboutInteractor.swift in Sources */,
 				0727EB8121E8BED800E1A956 /* StorageService.swift in Sources */,
 				0751183B21E7512D00394875 /* MainProtocol.swift in Sources */,
 				0751180921E74BA600394875 /* CurrencyConverter.xcdatamodeld in Sources */,
@@ -557,9 +573,13 @@
 				0751185021E755D900394875 /* StoryboardUtils.swift in Sources */,
 				0751185B21E7919900394875 /* AboutViewController.swift in Sources */,
 				0751184C21E7544A00394875 /* Alamofire.swift in Sources */,
+				0727EB8921ECB53700E1A956 /* AboutPresenter.swift in Sources */,
 				0751184921E7541100394875 /* NetworkUtils.swift in Sources */,
+				0727EB8721ECB4A000E1A956 /* AboutProtocol.swift in Sources */,
 				0751183F21E751DF00394875 /* MainConfigurator.swift in Sources */,
+				0727EB8B21ECB61400E1A956 /* AboutConfigurator.swift in Sources */,
 				0751184421E7530B00394875 /* MainRepository.swift in Sources */,
+				0727EB8F21ECB72600E1A956 /* AboutRouter.swift in Sources */,
 				0751183921E750F300394875 /* MainPresenter.swift in Sources */,
 				0751183D21E7518500394875 /* MainInteractor.swift in Sources */,
 				0751184E21E7552C00394875 /* MessageUtils.swift in Sources */,
