@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyPickerView" customModule="CurrencyConverter" customModuleProvider="target">
+            <connections>
+                <outlet property="pickerView" destination="97K-y1-PNq" id="quc-4j-t30"/>
+                <outlet property="titleLabel" destination="9Hv-Hz-8TT" id="5ix-IG-bNq"/>
+                <outlet property="view" destination="iN0-l3-epB" id="3ZD-st-E6d"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-BW-SbS">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hv-Hz-8TT">
+                            <rect key="frame" x="124" y="11.5" width="127" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WB-XG-SdG">
+                            <rect key="frame" x="8" y="5.5" width="53" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="iYT-d9-MSY"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEY-sM-Znd">
+                            <rect key="frame" x="320" y="5.5" width="47" height="33"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <state key="normal" title="Apply"/>
+                            <connections>
+                                <action selector="applyButtonClicked:" destination="-1" eventType="touchUpInside" id="g7X-jl-adb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="8WB-XG-SdG" firstAttribute="centerY" secondItem="Pn9-BW-SbS" secondAttribute="centerY" id="5ja-Am-gdF"/>
+                        <constraint firstItem="8WB-XG-SdG" firstAttribute="leading" secondItem="Pn9-BW-SbS" secondAttribute="leading" constant="8" id="5yi-6O-FGn"/>
+                        <constraint firstAttribute="height" constant="44" id="8VJ-aH-JRb"/>
+                        <constraint firstItem="UEY-sM-Znd" firstAttribute="centerY" secondItem="Pn9-BW-SbS" secondAttribute="centerY" id="CE6-AY-elS"/>
+                        <constraint firstItem="9Hv-Hz-8TT" firstAttribute="centerY" secondItem="Pn9-BW-SbS" secondAttribute="centerY" id="d95-pK-I5O"/>
+                        <constraint firstAttribute="trailing" secondItem="UEY-sM-Znd" secondAttribute="trailing" constant="8" id="rlG-3o-0Cw"/>
+                        <constraint firstItem="9Hv-Hz-8TT" firstAttribute="centerX" secondItem="Pn9-BW-SbS" secondAttribute="centerX" id="ze2-J4-Bep"/>
+                    </constraints>
+                </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97K-y1-PNq">
+                    <rect key="frame" x="0.0" y="44" width="375" height="162"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="CaA-cs-zNk"/>
+                        <outlet property="delegate" destination="-1" id="G0o-Mo-gh9"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="97K-y1-PNq" firstAttribute="top" secondItem="Pn9-BW-SbS" secondAttribute="bottom" id="BBf-Ee-JAv"/>
+                <constraint firstItem="97K-y1-PNq" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="CXg-TZ-B4B"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Pn9-BW-SbS" secondAttribute="trailing" id="IwG-0q-kDv"/>
+                <constraint firstItem="Pn9-BW-SbS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Sd1-GQ-PIA"/>
+                <constraint firstItem="97K-y1-PNq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZI8-YJ-dMl"/>
+                <constraint firstItem="Pn9-BW-SbS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hhA-kK-56O"/>
+                <constraint firstItem="97K-y1-PNq" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="qQF-wp-GPP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>
