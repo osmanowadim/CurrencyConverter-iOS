@@ -57,19 +57,19 @@ class MainInteractor: MainInteractorProtocol{
     
     var inputCurrencyIndex: Int {
         get {
-            return currencyService.inputCurrency.index!
+            return currencyService.inputCurrency.index ?? 0
         }
     }
     
     var outputCurrencyIndex: Int {
         get {
-            return currencyService.outputCurrency.index!
+            return currencyService.outputCurrency.index ?? 0
         }
     }
     
     var outputCurrencyRatio: Double {
         get {
-            return currencyService.outputCurrency.ratio!
+            return currencyService.outputCurrency.ratio ?? 1
         }
     }
     

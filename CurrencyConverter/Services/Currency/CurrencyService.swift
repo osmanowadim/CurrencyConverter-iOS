@@ -58,7 +58,7 @@ class CurrencyService: CurrencyServiceProtocol {
     var outputValue: Double {
         get {
             var value = inputValue
-            value *= outputCurrency.ratio!
+            value *= outputCurrency.ratio ?? 1
             return value
         }
     }
